@@ -58,6 +58,8 @@
     <background>background\Tileset_platforms_01</background>
     <background>background\Tileset_platforms_02</background>
     <background>background\Tileset_grass_01</background>
+    <background>background\test</background>
+    <background>background\TEST3</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\enemy_01</path>
