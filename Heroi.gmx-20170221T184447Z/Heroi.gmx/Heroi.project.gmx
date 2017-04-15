@@ -89,6 +89,7 @@
     <objects name="Enemy">
       <object>objects\Obj_enemy_01</object>
     </objects>
+    <object>objects\obj_viewer</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Npc_and_hud_Test_Room</room>
