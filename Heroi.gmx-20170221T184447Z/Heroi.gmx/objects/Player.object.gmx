@@ -165,10 +165,18 @@ if place_meeting(x,y+1,b_mask)
     }
 }
 
-else
+else 
 {
-    sprite_index = player_sprite_jump
+    if  vspeed &gt; 0
+    {
+        sprite_index = player_sprite_jump_down
+    }
+    else if vspeed &lt; 0
+    {
+        sprite_index = player_sprite_jump
+    }
 }
+
 
 }
 </string>

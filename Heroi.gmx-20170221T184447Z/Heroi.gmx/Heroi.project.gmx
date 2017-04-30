@@ -15,6 +15,7 @@
       <sprite>sprites\player_sprite_down</sprite>
       <sprite>sprites\player_sprite_walking</sprite>
       <sprite>sprites\player_sprite_jump</sprite>
+      <sprite>sprites\player_sprite_jump_down</sprite>
     </sprites>
     <sprite>sprites\Collision_sprite</sprite>
     <sprite>sprites\spr_platform</sprite>
