@@ -73,6 +73,7 @@
     <objects name="Assets">
       <object>objects\Coin_Object</object>
       <object>objects\Obj_food_02</object>
+      <object>objects\par_mask</object>
       <object>objects\b_mask</object>
       <object>objects\Obj_end_level</object>
       <object>objects\Obj_food_01</object>
