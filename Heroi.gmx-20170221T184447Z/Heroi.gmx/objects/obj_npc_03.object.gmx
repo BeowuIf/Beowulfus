@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>npc_dino_sprite_02</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -102,12 +102,12 @@ switch(state){
             hspeed += -ridespeed*0.4
             fd = false
         }
-        if keyboard_check(vk_up) and place_meeting(x,y+1,b_mask)
+        if keyboard_check(vk_up) and collision_line(x,y+1+64,x+64,y+1+64,par_mask,1,1)
             vspeed = -jump_speed
         
         hspeed *= 0.8
         
-        if keyboard_check(vk_down){ //jumping off
+        if keyboard_check(vk_down) and keyboard_check(vk_up){ //jumping off
             riding = false
             state = 0
             Player.yspeed = -10
@@ -139,37 +139,46 @@ switch(state){
             <kind>1</kind>
             <string>///Collisions
 if state = 1{
-    if collision_rectangle(x-1+(fd*66)+hspeed,y,x-1+(fd*66),y+63,b_mask,0,0){
+    if collision_rectangle(x-1+(fd*66)+hspeed,y,x-1+(fd*66),y+63,par_mask,0,0){
         switchfd = true;
         state = 0;
         timer = idletime;
-    }else if !collision_point(x-1+(fd*66)+hspeed,y+64,b_mask,0,0){
+    }else if !collision_point(x-1+(fd*66)+hspeed,y+64,par_mask,0,0){
         switchfd = true;
         state = 0;
         timer = idletime;
     }
 }
 
-if !place_meeting(x,y+1,b_mask)
-vspeed +=0.8;
+if !place_meeting(x,y+1,b_mask) and !(state = 2 and !keyboard_check(vk_down) and collision_line(x,y+1+64,x+64,y+1+64,obj_platform,1,1)) and !(state != 2 and collision_line(x,y+1+64,x+64,y+1+64,obj_platform,1,1))
+    vspeed +=0.8;
 
-if abs(vspeed) &gt; 0 &amp;&amp; place_meeting(x,y+vspeed,b_mask)
-{
-    while !place_meeting(x,y+sign(vspeed),b_mask)
-    {
-        y += sign(vspeed);
+if vspeed &gt; 0 &amp;&amp; (place_meeting(x,y+vspeed,b_mask)){
+    while !place_meeting(x,y+1,b_mask){
+        y += 1;
     }
-    vspeed =0;
+    vspeed = 0;
+}
+if vspeed &gt; 0 and ((state = 2 and !keyboard_check(vk_down) and collision_rectangle(x,y+64,x,y+vspeed+64,obj_platform,1,1)) or (state != 2 and collision_rectangle(x,y+64,x+64,y+vspeed+64,obj_platform,1,1))){
+    while !place_meeting(x,y+1,obj_platform){
+        y += 1;
+    }
+    vspeed = 0;
+}
+
+if vspeed &lt; 0 &amp;&amp; (place_meeting(x,y+vspeed,b_mask)){
+    while !place_meeting(x,y+vspeed,b_mask){
+        y -= 1;
+    }
+    vspeed = 0;
 }
 
 
-if abs(hspeed) &gt; 0 &amp;&amp; place_meeting(x+hspeed,y,b_mask)
-{
-    while !place_meeting(x+sign(hspeed),y,b_mask)
-    {
+if abs(hspeed) &gt; 0 &amp;&amp; place_meeting(x+hspeed,y,b_mask){
+    while !place_meeting(x+sign(hspeed),y,par_mask){
         x += sign(hspeed);
     }
-    hspeed =0;
+    hspeed = 0;
 }
 </string>
           </argument>

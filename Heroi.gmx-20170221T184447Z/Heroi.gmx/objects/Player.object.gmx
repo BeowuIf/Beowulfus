@@ -83,8 +83,10 @@ instance_create(0,0,obj_viewer)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !riding{//added to disable basic properties of obj while riding
+            <string>///Movement
+if !riding{//added to disable basic properties of obj while riding
 
+<<<<<<< HEAD
 key_down = keyboard_check(vk_down);
 
 if keyboard_check(vk_right)
@@ -126,57 +128,91 @@ if abs(yspeed) &gt; 0 &amp;&amp; place_meeting(x,y+yspeed,b_mask)
         y += sign(yspeed);
         if yspeed &gt; 0
             dubjump = true
+=======
+    key_down = keyboard_check(vk_down);
+    
+    if keyboard_check(vk_right){
+        xspeed +=2;
+        image_xscale = 1
+        shoot_dir = 0
+>>>>>>> d41079037c2e46571ac23f2c8592431dcc1fe408
     }
-    yspeed =0;
-}
-y +=yspeed;
-
-
-if abs(xspeed) &gt; 0 &amp;&amp; place_meeting(x+xspeed,y,b_mask)
-{
-    while !place_meeting(x+sign(xspeed),y,b_mask)
-    {
-        x += sign(xspeed);
+    
+    if keyboard_check(vk_left){
+        xspeed -=2;
+        image_xscale = -1
+        shoot_dir = 180
     }
-    xspeed =0;
-}
-x+=xspeed;
-
-
-xspeed *= 0.8;
-
-if abs(xspeed) &lt; 0.5
-xspeed = 0;
-
-
-if place_meeting(x,y+1,b_mask)
-{
-    if abs(xspeed) &lt; 2
-    sprite_index = player_sprite_idle
-    else
-    sprite_index = player_sprite_walking
-    image_speed = 1
-    if keyboard_check_direct(vk_down)
-    {
-    sprite_index = player_sprite_down   
-    if (image_index==image_number-1)
-        {
-        image_speed = 0
-        }  
+    
+    if yspeed == 0 &amp;&amp; keyboard_check_pressed(vk_up) &amp;&amp; place_meeting(x,y+1,b_mask){// &amp;&amp; dubjump = false{
+        yspeed -= jump_speed; 
+        dubjump = true;
+        sound_play(jump_sound)
     }
-}
-
-else 
-{
-    if  vspeed &gt; 0
-    {
-        sprite_index = player_sprite_jump_down
+    //Ideia para jetpack
+    else if keyboard_check_pressed(vk_up) &amp;&amp; place_free(x,y+1) &amp;&amp; dubjump = true{
+        yspeed = -jump_speed
+        dubjump = false;
     }
-    else if vspeed &lt; 0
-    {
-        sprite_index = player_sprite_jump
+    
+    
+    if !place_meeting(x,y+1,b_mask) and !(!key_down and collision_line(x-16,y+1+32,x+16,y+1+32,obj_platform,1,false))
+        yspeed +=0.8;
+    
+        
+    if yspeed &gt; 0 &amp;&amp; (place_meeting(x,y+yspeed,b_mask) or (!key_down and collision_rectangle(x-16,y+32,x+16,y+yspeed+32,obj_platform,1,false))){
+        while !place_meeting(x,y+sign(yspeed),par_mask){
+            y += sign(yspeed);
+            if yspeed &gt; 0
+                dubjump = true
+        }
+        yspeed =0;
     }
-}
+    if yspeed &lt; 0 &amp;&amp; (place_meeting(x,y+yspeed,b_mask)){
+        while !place_meeting(x,y+sign(yspeed),par_mask){
+            y += sign(yspeed);
+            if yspeed &gt; 0
+                dubjump = true
+        }
+        yspeed =0;
+    }
+    y +=yspeed;
+    
+    
+    if abs(xspeed) &gt; 0 &amp;&amp; (place_meeting(x+xspeed,y,b_mask)){
+        while !place_meeting(x+sign(xspeed),y,par_mask){
+            x += sign(xspeed);
+        }
+        xspeed =0;
+    }
+    x+=xspeed;
+    
+    
+    xspeed *= 0.8;
+    
+    if abs(xspeed) &lt; 0.5
+        xspeed = 0;
+    
+    
+    if (place_meeting(x,y+1,b_mask) or (!key_down and collision_line(x-16,y+1+32,x+16,y+1+32,obj_platform,1,false))){
+        if abs(xspeed) &lt; 2
+            sprite_index = player_sprite_idle
+        else
+            sprite_index = player_sprite_walking
+        image_speed = 1
+        if keyboard_check_direct(vk_down){
+            sprite_index = player_sprite_down   
+            if (image_index==image_number-1){
+                image_speed = 0
+            }  
+        }
+    }else{
+        if yspeed &gt; 0{
+            sprite_index = player_sprite_jump_down
+        }else if yspeed &lt; 0{
+            sprite_index = player_sprite_jump
+        }
+    }
 
 
 }
