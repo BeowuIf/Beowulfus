@@ -5,8 +5,11 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\jump_sound</sound>
     <sound>sound\coin_sound</sound>
+    <sound>sound\bgmusic</sound>
+    <sound>sound\jump_sound</sound>
+    <sound>sound\chomp1</sound>
+    <sound>sound\chomp2</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="Player">
@@ -27,12 +30,16 @@
       <sprite>sprites\asset_end_level</sprite>
       <sprite>sprites\item_sprite_apple</sprite>
       <sprite>sprites\item_sprite_orange</sprite>
+      <sprite>sprites\asset_cave</sprite>
+      <sprite>sprites\asset_water</sprite>
+      <sprite>sprites\asset_hole</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\enemy_roach_left</sprite>
       <sprite>sprites\enemy_roach_right</sprite>
       <sprite>sprites\enemy_roach_squashed</sprite>
       <sprite>sprites\enemy_roach_squashed_anim</sprite>
+      <sprite>sprites\sprite34</sprite>
     </sprites>
     <sprites name="NPCs">
       <sprite>sprites\npc_dog_sprite_unhappy</sprite>
@@ -46,6 +53,8 @@
       <sprite>sprites\npc_dino_walking_sprite_01</sprite>
       <sprite>sprites\npc_dino_riding_jump_sprite_02</sprite>
     </sprites>
+    <sprite>sprites\sprite30</sprite>
+    <sprite>sprites\assets_death_object</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\Bg_Underground</background>
@@ -61,6 +70,8 @@
     <background>background\Tileset_grass_01</background>
     <background>background\test</background>
     <background>background\TEST3</background>
+    <background>background\background13</background>
+    <background>background\background14</background>
   </backgrounds>
   <paths name="paths">
     <path>paths\enemy_01</path>
@@ -80,6 +91,11 @@
       <object>objects\obj_orange</object>
       <object>objects\obj_HUD</object>
       <object>objects\obj_platform</object>
+      <object>objects\object16</object>
+      <object>objects\object17</object>
+      <object>objects\object18</object>
+      <object>objects\object19</object>
+      <object>objects\hole</object>
     </objects>
     <objects name="NPC">
       <object>objects\Obj_npc_01</object>
@@ -89,6 +105,7 @@
     </objects>
     <objects name="Enemy">
       <object>objects\Obj_enemy_01</object>
+      <object>objects\obj_enemy_02</object>
     </objects>
     <object>objects\obj_viewer</object>
   </objects>

@@ -33,7 +33,7 @@ yspeed = 0;
 xspeed = 0;
 facing_direction = 1;
 key_down = 0;
-
+audio_play_sound(bgmusic, 20, true);
 
 jump_speed = 11 //was 10. With 11, you can reach the small floating platform
 
@@ -103,6 +103,7 @@ if keyboard_check(vk_left)
 
 if yspeed == 0 &amp;&amp; keyboard_check_pressed(vk_up) &amp;&amp; place_meeting(x,y+1,b_mask)// &amp;&amp; dubjump = false
 {
+audio_play_sound(jump_sound, 10, false);
 yspeed -= jump_speed; 
 dubjump = true;
 sound_play(jump_sound)
